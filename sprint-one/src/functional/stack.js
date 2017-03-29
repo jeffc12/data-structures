@@ -8,9 +8,19 @@ var Stack = function() {
   // Implement the methods below
   someInstance.push = function(value) {
     count++;
+     someInstance[count] = value;
+     
   };
 
   someInstance.pop = function() {
+  var tempValue = someInstance[count];
+  delete someInstance[count];
+  if( count > 0){ 
+   
+    count--;
+  }
+
+  return tempValue;
   };
 
   someInstance.size = function() {
