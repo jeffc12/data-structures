@@ -24,27 +24,30 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-	/*for(var key in this){
-		if(this[key]===target){
-			return true
-		}
-	}
-	return false
-	*/
-	var call = this.value; 
+	
+	var result = false; 
+	var call = this; 
 
  function search(compare, values) { 
-if (this.value === target) { 
+ 	
+		if (values.value === compare) { 
+			result = true;
+		}
 
-	return true; 
+		if (Array.isArray(values.children)) { 
+
+			values.children.forEach(function(index) { 
+
+				search(target, index);
+
+			})
+		}
 	}
 
-if (Array.isArray(this.children)) { 
+search(target,call); 
 
-	this.children.forEach(function(index) { 
+return result; 
 
-		})
-}
 };
 
 
