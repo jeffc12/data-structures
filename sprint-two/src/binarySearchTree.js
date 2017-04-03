@@ -1,38 +1,74 @@
 var BinarySearchTree = function(value) {
 
-	var storage = {}; 
-	storage.tree = {};
+var tree = Object.create(BinaryStorage);
 
+	tree.left = null;
+	tree.right = null;
+	tree.value = value;
 
-storage.left = function() {
+	return tree;
+}
+
+var BinaryStorage = {};
+
+BinaryStorage.insert = function(value) {
+
+if(value < this.value) {
+
+		if (this.left) {
+		this.left.insert(value);
+		}
+	else {
+		this.left = BinarySearchTree(value);
+	}
+}
+
+if (value > this.value) {
+
+		if(this.right) {
+			this.right.insert(value);
+		}
+		else {
+			this.right = BinarySearchTree(value);
+		}
+	}
 
 }
 
-storage.right = function() {
+BinaryStorage.contains = function(value) {
 
+	if(this.value === value) {
+		return true;
+	}
+
+	if(this.right && value > this.value){
+
+			return this.right.contains(value);
+	}
+
+	if (this.left && value < this.value){
+
+		return this.left.contains(value);
+
+	}
+
+return false;
 }
 
-storage.insert = function(value) {
+BinaryStorage.depthFirstLog = function(callback){
 
-	if(value)
-		storage.tree[value] =value;
-	
+	callback(this.value);
+
+	if(this.right) {
+		this.right.depthFirstLog(callback);
+
+	}
+
+	if(this.left){
+		this.left.depthFirstLog(callback);
+	}
+
 }
-
-storage.contains = function(value) {
-	return (storage.tree.indexOf(value) !== -1);
-}
-
-storage.depthFirstLog = function(callback) {
-
-	return callback(storage.tree);
-}
-
-console.log(storage.tree);
-return storage;
-
-};
-
 
 
 
